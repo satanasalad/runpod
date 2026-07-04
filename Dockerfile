@@ -14,10 +14,9 @@ RUN apt-get update && apt-get install -y \
 # 1. Установка Tailscale через официальный скрипт
 RUN curl -fsSL https://tailscale.com/install.sh | sh
 
-# 2. Чистая установка Ollama (скачиваем бинарник напрямую в обход проверок GPU)
-RUN wget -q https://ollama.com/download/ollama-linux-amd64.tgz && \
-    tar -C /usr -xzf ollama-linux-amd64.tgz && \
-    rm ollama-linux-amd64.tgz
+# 2. Чистая установка Ollama (скачиваем стабильный бинарник напрямую в системную папку)
+RUN curl -L https://ollama.com/download/ollama-linux-amd64 -o /usr/bin/ollama && \
+    chmod +x /usr/bin/ollama
 
 WORKDIR /app
 
