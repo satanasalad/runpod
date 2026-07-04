@@ -19,10 +19,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ЭТОТ ШАГ ПОКАЖЕТ РЕАЛЬНОЕ СОДЕРЖИМОЕ ФАЙЛА В ЛОГАХ
-      - name: Debug Dockerfile Content
-        run: cat Dockerfile
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
