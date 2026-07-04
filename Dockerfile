@@ -2,6 +2,7 @@ FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Меняем порядок или добавляем пробел, чтобы инвалидировать кэш слоев GitHub
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -11,16 +12,17 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# 1. Установка Tailscale через официальный скрипт
-RUN curl -fsSL https://tailscale.com/install.sh | sh
+# 1. Скачивание официального стабильного релиза Ollama напрямую с GitHub Releases (теперь идет первым)
+RUN wget --no-check-certificate -q -O ollama-linux-amd64.tgz https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64.tgz && \
+    tar -C /usr -xzf ollama-linux-amd64.tgz && \
+    rm ollama-linux-amd64.tgz
 
-# 2. Установка Ollama с флагом игнорирования инициализации GPU/сервиса
-ENV OLLAMA_SKIP_STARTING_SERVICE=1
-RUN curl -fsSL https://ollama.com/install.sh | sh
+# 2. Установка Tailscale
+RUN curl -fsSL https://tailscale.com/install.sh | sh
 
 WORKDIR /app
 
-# Копируем конфиги и скрипт запуска
+# Копируем только конфиги и скрипт
 COPY gemma4.modelfile qwen36.modelfile fable.modelfile start.sh ./
 RUN chmod +x start.sh
 
