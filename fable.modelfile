@@ -1,0 +1,3 @@
+FROM ./gemma-4-31b-fable-coder-i1-gguf.gguf
+PARAMETER num_ctx 65536
+PARAMETER stop "<|im_end|>"
