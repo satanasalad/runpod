@@ -11,12 +11,10 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем только Tailscale
 RUN curl -fsSL https://tailscale.com/install.sh | sh
 
 WORKDIR /app
 
-# Копируем конфиги моделей и скрипт
 COPY gemma4.modelfile qwen36.modelfile fable.modelfile start.sh ./
 RUN chmod +x start.sh
 
