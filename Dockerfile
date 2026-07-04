@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
 RUN curl -fsSL https://tailscale.com/install.sh | sh
 
 # 2. Скачивание официального стабильного релиза Ollama напрямую с GitHub Releases
-# 2. Скачивание официального стабильного релиза Ollama напрямую с GitHub Releases
 RUN wget --no-check-certificate -q -O ollama-linux-amd64.tgz https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64.tgz && \
     tar -C /usr -xzf ollama-linux-amd64.tgz && \
     rm ollama-linux-amd64.tgz
