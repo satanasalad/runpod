@@ -1,0 +1,4 @@
+FROM ./gemma-4-31b-q4_k_m.gguf
+PARAMETER num_ctx 65536
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|endoftext|>"
