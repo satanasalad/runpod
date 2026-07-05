@@ -2,7 +2,8 @@
 set -e # Прерывать выполнение при любой ошибке
 
 echo "[INFO] Starting Tailscale daemon..."
-tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055 &
+# ЧИСТЫЙ ЗАПУСК: убрали --outbound-http-proxy-listen, чтобы не блокировать входящий порт 11434
+tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
 sleep 3
 
 if [ -n "$TS_AUTHKEY" ]; then
