@@ -2,7 +2,7 @@ FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Установка системных зависимостей
+# Установка системных зависимостей (включая zstd для Ollama)
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y \
     sudo \
     ca-certificates \
     git \
+    zstd \
     && rm -rf /var/lib/apt/lists/*
 
-# Официальная и чистая установка Ollama в систему
+# Официальная установка Ollama в систему
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
 # Установка Tailscale
